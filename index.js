@@ -18,25 +18,24 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 cloudinary.v2.config({
-    cloud_name: process.env.CLOUDINARY_CLIENT_NAME,
-    api_key: process.env.CLOUDINARY_CLIENT_API,
-    api_secret: process.env.CLOUDINARY_CLIENT_SECRET,
-  });
-  
+  cloud_name: process.env.CLOUDINARY_CLIENT_NAME,
+  api_key: process.env.CLOUDINARY_CLIENT_API,
+  api_secret: process.env.CLOUDINARY_CLIENT_SECRET,
+});
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-    fileUpload({
-      useTempFiles: true,
-      tempFileDir: "/tmp/",
-    })
-  );
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 app.use(cookieParser());
 const corsOption = {
-    origin: 'http://localhost:3000',
-    credentials: true
+  origin: 'http://localhost:3000',
+  credentials: true
 };
 app.use(cors(corsOption));
 
@@ -50,6 +49,6 @@ app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/selection", courseSelectionRoute);
 
 app.listen(PORT, () => {
-    connectDB();
-    console.log(`server listen at port ${PORT}`)
+  connectDB();
+  console.log(`server listen at port ${PORT}`)
 })
